@@ -17,13 +17,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, "public")));
-
+//app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 // Routes
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html')); // Serve index.html as the default page
 });
+
+const icuRoutes = require("./routes/icuRoutes");
+app.use("/icus", icuRoutes);
 
 
 // MongoDB connection
